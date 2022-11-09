@@ -77,6 +77,8 @@ public class SaleItemsController extends HttpServlet {
 			default:
 				showSaleItemsList(request, response);
 			}
+		}else {
+			response.sendRedirect("home-page.html");
 		}
 		
 	}

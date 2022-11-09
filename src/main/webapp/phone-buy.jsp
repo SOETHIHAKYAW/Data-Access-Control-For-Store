@@ -58,7 +58,7 @@
         <div class="mb-3">
                 <label for="quantity" class="form-label">Phone Quantity in Store : ${phone.quantity} </label>
             <div class="col-sm-9">
-                <input type="number" value="" id="quantity" name="quantity" placeholder="Enter Quantity that wants to buy" class="form-control">
+                <input type="number" value="" id="quantity" name="quantity" min="1" max="${phone.quantity }" placeholder="Enter Quantity that wants to buy" class="form-control">
             </div>
         </div>
         

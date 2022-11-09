@@ -86,6 +86,8 @@ public class AdminController extends HttpServlet {
 			default :
 				showItemsList(request, response);
 			}
+		}else {
+			response.sendRedirect("home-page.html");
 		}
 		
 	}
