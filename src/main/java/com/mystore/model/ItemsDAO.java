@@ -51,7 +51,8 @@ public class ItemsDAO {
 						rs.getString("name"), 
 						rs.getDouble("price"), 
 						rs.getInt("quantity"), 
-						rs.getDate("stockin")
+						rs.getDate("stockin"),
+						rs.getString("imgname")
 						);
 				
 			}
@@ -79,7 +80,8 @@ public class ItemsDAO {
 					+ "`name` = ?, "
 					+ "`price` = ?, "
 					+ "`quantity` = ?, "
-					+ "`stockin` = ? "
+					+ "`stockin` = ? , "
+					+ "imgname = ?"
 					+ "WHERE (`id` = ?);"
 					+ "");
 			
@@ -88,8 +90,8 @@ public class ItemsDAO {
 			pStmt.setDouble(3, items.getPrice());
 			pStmt.setInt(4, items.getQuantity());
 			pStmt.setDate(5, items.getStockin());
-			
-			pStmt.setInt(6, items.getId());
+			pStmt.setString(6, items.getImgname());
+			pStmt.setInt(7, items.getId());
 			
 			rowEffected = pStmt.executeUpdate();
 			
@@ -135,8 +137,8 @@ public class ItemsDAO {
 			connection = dataSource.getConnection();
 			
 			pStmt = connection.prepareStatement("INSERT INTO `items` "
-					+ "(`goodsid`, `name`, `price`, `quantity`, `stockin`) "
-					+ "VALUES (?, ?, ?, ?, ?);"
+					+ "(`goodsid`, `name`, `price`, `quantity`, `stockin`, imgname) "
+					+ "VALUES (?, ?, ?, ?, ?, ?);"
 					);
 			
 			pStmt.setString(1, items.getGoodsid());
@@ -144,6 +146,11 @@ public class ItemsDAO {
 			pStmt.setDouble(3, items.getPrice());
 			pStmt.setInt(4, items.getQuantity());
 			pStmt.setDate(5, items.getStockin());
+			pStmt.setString(6, items.getImgname());
+//			
+//			File f = new File("/home/");
+//			
+//			pStmt.set
 			
 			rowEffected = pStmt.executeUpdate();
 			
@@ -177,7 +184,8 @@ public class ItemsDAO {
 						rs.getString("name"), 
 						rs.getDouble("price"), 
 						rs.getInt("quantity"), 
-						rs.getDate("stockin")
+						rs.getDate("stockin"),
+						rs.getString("imgname")
 						
 						)
 						);

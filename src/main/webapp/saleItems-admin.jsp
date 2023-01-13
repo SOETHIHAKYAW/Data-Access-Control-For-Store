@@ -25,10 +25,21 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="css/styles.css" rel="stylesheet" />
 <link href="css/custom.css" rel="stylesheet" />
+
+<style type="text/css">
+img {
+	object-fit: cover;
+}
+
+td {
+	text-align: justify;
+}
+</style>
+
 </head>
 <body id="body">
 
-	<c:if test="${user.role == 'user'}">
+	<c:if test="${user.role == 'user' && user.role == null}">
 	 
 		<c:redirect url="home-page.html"> <a href=""></a> </c:redirect>
 	
@@ -78,10 +89,12 @@
 				<tr>
 					<th>ID</th>
 					<th>GoodsID</th>
+					<th>Images</th>
 					<th>Goods Name</th>
 					<th>Price</th>
 					<th>Quantity</th>
 					<th>Total Price</th>
+					
 <%-- 					<c:if test="${user.role == 'admin'}"> --%>
 					<th>Action</th>
 <%-- 					</c:if> --%>
@@ -107,10 +120,13 @@
 					<tr>
 						<td> <c:out value="${sale.id}"></c:out> </td>
 						<td> <c:out value="${sale.goodsid}"></c:out> </td>
+						<th> <img alt="" src="${sale.imgname }" width="100px"
+							height="100px"> </th>
 						<td> <c:out value="${sale.name}"></c:out> </td>
 						<td> <c:out value="${sale.price}"></c:out> </td>
 						<td> <c:out value="${sale.quantity}"></c:out> </td>
 						<td> <c:out value="${sale.price * sale.quantity}"></c:out> </td>
+						
 <%-- 						<c:if test="${user.role == 'admin'}">					 --%>
 						<td> 
 							<a class="btn btn-primary" href="${update}"> Edit </a>
@@ -126,10 +142,12 @@
 				<tr>
 					<th>ID</th>
 					<th>GoodsID</th>
+					<th>Images</th>
 					<th>Goods Name</th>
 					<th>Price</th>
 					<th>Quantity</th>
 					<th>Total Price</th>
+					
 <%-- 					<c:if test="${user.role == 'admin'}"> --%>
 					<th>Action</th>
 <%-- 					</c:if> --%>

@@ -7,6 +7,7 @@ public class Laptop {
 	private String name;
 	private double price;
 	private int quantity;
+	private String imgname;
 
 	public Laptop() {
 		super();
@@ -21,12 +22,13 @@ public class Laptop {
 	}
 
 	// for new table to create laptop from buy.
-	public Laptop(String goodsid, String name, double price, int quantity) {
+	public Laptop(String goodsid, String name, double price, int quantity, String imgname) {
 		super();
 		this.goodsid = goodsid;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
+		this.setImgname(imgname);
 	}
 	
 	public int getId() {
@@ -74,6 +76,14 @@ public class Laptop {
 	public String toString() {
 		return "Laptop [id=" + id + ", goodsid=" + goodsid + ", name=" + name + ", price=" + price + ", quantity="
 				+ quantity + "]";
+	}
+
+	public String getImgname() {
+		return imgname;
+	}
+
+	public void setImgname(String imgname) {
+		this.imgname = imgname;
 	}
 
 //		Date today = new Date(new java.util.Date().getTime());

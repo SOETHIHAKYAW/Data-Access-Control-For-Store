@@ -25,7 +25,7 @@
     </head>
     <body> 
 <div class="container">
-    <form action="earphone" method="post" class="form-horizontal" role="form">
+    <form action="earphone" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
         <h2 class="text-center">Order Detail</h2>
         
         <h3>ID : ${earphone.goodsid } </h3>
@@ -55,6 +55,20 @@
                 <input type="text" value="${earphone.price}" id="price" name="price" readonly="readonly" placeholder="Price" class="form-control">
             </div>
         </div>
+        
+        <div class="mb-3">
+				<label for="Image" class="col-sm-3 control-label">Image </label>
+				<div class="col-sm-9">
+					<input type="text" value="${earphone.imgname }" id="file" name="file"
+						readonly="readonly" placeholder="" class="form-control">
+				</div>
+			</div>
+
+
+			<div class="mb-3">
+				<img alt="" src="${earphone.imgname}" width="100px" height="100px">
+			</div>
+        
         <div class="mb-3">
                 <label for="quantity" class="form-label">Earphone Quantity in Store : ${earphone.quantity} </label>
             <div class="col-sm-9">

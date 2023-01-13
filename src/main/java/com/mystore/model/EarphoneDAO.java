@@ -1,7 +1,6 @@
 package com.mystore.model;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,7 +32,7 @@ public class EarphoneDAO {
 	}
 	
 	//create Earphone to new table(sale table)
-		public int createLaptop(final Earphone earphone) {
+		public int createEarphone(final Earphone earphone) {
 			
 			int rowEffected = 0;
 			
@@ -41,12 +40,13 @@ public class EarphoneDAO {
 				connection = dataSource.getConnection();
 				
 				pStmt = connection.prepareStatement(
-						"INSERT INTO `sale` (`goodsid`, `name`, `price`, `quantity`) "
-						+ "VALUES (?, ?, ?, ?);");
+						"INSERT INTO `sale` (`goodsid`, `name`, `price`, `quantity`, imgname) "
+						+ "VALUES (?, ?, ?, ?, ?);");
 				pStmt.setString(1, earphone.getGoodsid());
 				pStmt.setString(2, earphone.getName());
 				pStmt.setDouble(3, earphone.getPrice());
 				pStmt.setInt(4, earphone.getQuantity());
+				pStmt.setString(5, earphone.getImgname());
 				
 				rowEffected = pStmt.executeUpdate();
 				
@@ -74,15 +74,17 @@ public class EarphoneDAO {
 					+ "goodsid = ?, "
 					+ "name = ?, "
 					+ "price = ?, "
-					+ "quantity=quantity-? "
+					+ "quantity=quantity-?, "
+					+ "imgname = ? "
 					+ "where (`goodsid` = ?);");
 			
 			pStmt.setString(1, earphone.getGoodsid());
 			pStmt.setString(2, earphone.getName());
 			pStmt.setDouble(3, earphone.getPrice());
 			pStmt.setInt(4, earphone.getQuantity());
+			pStmt.setString(5, earphone.getImgname());
 			
-			pStmt.setString(5, earphone.getGoodsid());
+			pStmt.setString(6, earphone.getGoodsid());
 			
 			rowEffected = pStmt.executeUpdate();
 			
@@ -112,7 +114,8 @@ public class EarphoneDAO {
 						rs.getString("goodsid"), 
 						rs.getString("name"), 
 						rs.getDouble("price"),
-						rs.getInt("quantity")
+						rs.getInt("quantity"),
+						rs.getString("imgname")
 						);
 			}
 			
@@ -136,14 +139,15 @@ public class EarphoneDAO {
 			connection = dataSource.getConnection();
 			
 			stmt = connection.createStatement();
-			rs = stmt.executeQuery("select goodsid,name,price,quantity from items where goodsid like 'B%';");
+			rs = stmt.executeQuery("select goodsid,name,price,quantity,imgname from items where goodsid like 'B%';");
 			
 			while(rs.next()) {
 				earphoneList.add(new Earphone(
 						rs.getString("goodsid"), 
 						rs.getString("name"), 						
 						rs.getDouble("price"),
-						rs.getInt("quantity")
+						rs.getInt("quantity"),
+						rs.getString("imgname")
 						));
 			}
 			

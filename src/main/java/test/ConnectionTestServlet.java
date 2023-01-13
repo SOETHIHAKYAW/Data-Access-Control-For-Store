@@ -2,7 +2,6 @@ package test;
 
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,7 +14,6 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 
-import com.mystore.model.Items;
 import com.mystore.model.Laptop;
 
 /**
@@ -53,7 +51,7 @@ public class ConnectionTestServlet extends HttpServlet {
 			
 			stmt = connection.createStatement();
 			
-			rs = stmt.executeQuery("select goodsid,name,price,quantity from items where id between 1 and 8;");
+			rs = stmt.executeQuery("select goodsid,name,price,quantity,imgname from items where id between 1 and 8;");
 			
 			while (rs.next()) {
 				
@@ -61,7 +59,8 @@ public class ConnectionTestServlet extends HttpServlet {
 						rs.getString("goodsid"), 
 						rs.getString("name"), 
 						rs.getDouble("price"),
-						rs.getInt("quantity")
+						rs.getInt("quantity"),
+						rs.getString("imgname")
 						);		
 				
 				

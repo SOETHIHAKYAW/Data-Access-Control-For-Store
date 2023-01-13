@@ -3,12 +3,12 @@ package com.mystore.controller;
 import jakarta.annotation.Resource;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
-import java.sql.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -16,11 +16,18 @@ import javax.sql.DataSource;
 import com.mystore.model.Phone;
 import com.mystore.model.PhoneDAO;
 
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+maxFileSize = 1024 * 1024 * 10, // 10MB
+maxRequestSize = 1024 * 1024 * 50)
+
 /**
  * Servlet implementation class PhoneController
  */
 public class PhoneController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	public static final String UPLOAD_DIR = "images";
+	public String dbFileName = "";
 	
 	@Resource(name = "jdbc/storeResult")
 	
@@ -70,30 +77,83 @@ public class PhoneController extends HttpServlet {
 	//create Phone to sale table
 	private void createPhone(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+//		Part part = request.getPart("file");
+//		String fileName = extractFileName(part);
+//
+//		String applicationPath = "/home/michael/JAVAEE/ADEN-STORE/src/main/webapp/";
+//
+//		String uploadPath = applicationPath + UPLOAD_DIR;
+//
+//		File fileUploadDir = new File(uploadPath);
+//		if (!fileUploadDir.exists()) {
+//			fileUploadDir.mkdir();
+//
+//		}
+//
+//		String savePath = uploadPath + File.separator + fileName;
+//		part.write(savePath);
+//
+//		dbFileName = UPLOAD_DIR + File.separator + fileName;
+		
 		String goodid = request.getParameter("goodsid");
 		String name = request.getParameter("name");
 		double price = Double.parseDouble(request.getParameter("price"));
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		String file = request.getParameter("file");
 		
-		Phone phone = new Phone(goodid, name, price, quantity);
+		Phone phone = new Phone(goodid, name, price, quantity, /*dbFileName*/ file);
 		
-		int rowEffected = this.phoneDAO.createLaptop(phone);
+		int rowEffected = this.phoneDAO.createPhone(phone);
 		
 		if(rowEffected > 0) {
 			showPhoneList(request, response);
 		}
 		
 	}
+//	
+//	private String extractFileName(Part part) {
+//		// TODO Auto-generated method stub
+//
+//		String contentDisp = part.getHeader("content-disposition");
+//		String[] itmes = contentDisp.split(";");
+//
+//		for (String s : itmes) {
+//			if (s.trim().startsWith("filename")) {
+//				return s.substring(s.indexOf("=") + 2, s.length() - 1);
+//			}
+//		}
+//		return "";
+//	}
 	
 	//update -> buy
 	private void updatePhone(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+//		Part part = request.getPart("file");
+//		String fileName = extractFileName(part);
+//
+//		String applicationPath = "/home/michael/JAVAEE/ADEN-STORE/src/main/webapp/";
+//
+//		String uploadPath = applicationPath + UPLOAD_DIR;
+//
+//		File fileUploadDir = new File(uploadPath);
+//		if (!fileUploadDir.exists()) {
+//			fileUploadDir.mkdir();
+//
+//		}
+//
+//		String savePath = uploadPath + File.separator + fileName;
+//		part.write(savePath);
+//
+//		dbFileName = UPLOAD_DIR + File.separator + fileName;
 		
 		String goodsid = request.getParameter("goodsid");
 		String name = request.getParameter("name");
 		double price = Double.parseDouble(request.getParameter("price"));
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		String file = request.getParameter("file");
 		
-		Phone phone = new Phone(goodsid, name, price, quantity);
+		
+		Phone phone = new Phone(goodsid, name, price, quantity,/*dbFileName*/ file);
 		
 		int rowEffected = this.phoneDAO.updatePhone(phone);
 		

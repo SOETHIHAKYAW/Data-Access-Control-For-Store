@@ -7,6 +7,7 @@ public class Phone {
 	private String name;
 	private double price;
 	private int quantity;
+	private String imgname;
 
 	public Phone() {
 		super();
@@ -19,14 +20,33 @@ public class Phone {
 		this.name = name;
 		this.price = price;
 	}
+	
+	public Phone(String goodsid, String name, double price, String imgname) {
+		super();
+		this.goodsid = goodsid;
+		this.name = name;
+		this.price = price;
+		this.imgname = imgname;
+	}
+	
+	// for new table to create phone from buy.
+		public Phone(String goodsid, String name, double price, int quantity) {
+			super();
+			this.goodsid = goodsid;
+			this.name = name;
+			this.price = price;
+			this.quantity = quantity;
+		}
+
 
 	// for new table to create phone from buy.
-	public Phone(String goodsid, String name, double price, int quantity) {
+	public Phone(String goodsid, String name, double price, int quantity, String imgname) {
 		super();
 		this.goodsid = goodsid;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
+		this.imgname = imgname;
 	}
 
 	public String getGoodsid() {
@@ -73,6 +93,14 @@ public class Phone {
 	public String toString() {
 		return "Phone [id=" + id + ", goodsid=" + goodsid + ", name=" + name + ", price=" + price + ", quantity="
 				+ quantity + "]";
+	}
+
+	public String getImgname() {
+		return imgname;
+	}
+
+	public void setImgname(String imgname) {
+		this.imgname = imgname;
 	}
 
 }

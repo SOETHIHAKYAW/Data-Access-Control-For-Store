@@ -7,6 +7,7 @@ public class SaleItems {
 	private String name;
 	private double price;
 	private int quantity;
+	private String imgname;
 
 	public SaleItems() {
 		super();
@@ -27,6 +28,16 @@ public class SaleItems {
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
+	}
+
+	public SaleItems(int id,String goodsid, String name, double price, int quantity, String imgname) {
+		super();
+		this.id = id;
+		this.goodsid = goodsid;
+		this.name = name;
+		this.price = price;
+		this.quantity = quantity;
+		this.imgname = imgname;
 	}
 
 	public int getId() {
@@ -69,10 +80,18 @@ public class SaleItems {
 		this.quantity = quantity;
 	}
 
+	public String getImgname() {
+		return imgname;
+	}
+
+	public void setImgname(String imgname) {
+		this.imgname = imgname;
+	}
+
 	@Override
 	public String toString() {
 		return "SaleItems [id=" + id + ", goodsid=" + goodsid + ", name=" + name + ", price=" + price + ", quantity="
-				+ quantity + "]";
+				+ quantity + ", imgname=" + imgname + "]";
 	}
 
 }

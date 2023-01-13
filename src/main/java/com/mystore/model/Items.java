@@ -10,8 +10,9 @@ public class Items {
 	private double price;
 	private int quantity;
 	private Date stockin;
+	private String imgname;
 
-	public Items(int id, String goodsid, String name, double price, int quantity, Date stockin) {
+	public Items(int id, String goodsid, String name, double price, int quantity, Date stockin, String imgname) {
 		super();
 		this.id = id;
 		this.goodsid = goodsid;
@@ -19,6 +20,17 @@ public class Items {
 		this.price = price;
 		this.quantity = quantity;
 		this.stockin = stockin;
+		this.imgname = imgname;
+	}
+	
+	public Items(String goodsid, String name, double price, int quantity, Date stockin,String imgname) {
+		super();
+		this.goodsid = goodsid;
+		this.name = name;
+		this.price = price;
+		this.quantity = quantity;
+		this.stockin = stockin;
+		this.imgname = imgname;
 	}
 
 	public Items(String goodsid, String name, double price, int quantity, Date stockin) {
@@ -83,6 +95,14 @@ public class Items {
 	public String toString() {
 		return "Items [id=" + id + ", goodsid=" + goodsid + ", name=" + name + ", price=" + price + ", quantity="
 				+ quantity + ", stockin=" + stockin + "]";
+	}
+
+	public String getImgname() {
+		return imgname;
+	}
+
+	public void setImgname(String imgname) {
+		this.imgname = imgname;
 	}
 
 }

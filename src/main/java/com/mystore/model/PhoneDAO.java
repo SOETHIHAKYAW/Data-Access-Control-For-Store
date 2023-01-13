@@ -32,7 +32,7 @@ public class PhoneDAO {
 	}
 	
 	//create Phone to new table(sale table)
-		public int createLaptop(final Phone phone) {
+		public int createPhone(final Phone phone) {
 			
 			int rowEffected = 0;
 			
@@ -40,12 +40,13 @@ public class PhoneDAO {
 				connection = dataSource.getConnection();
 				
 				pStmt = connection.prepareStatement(
-						"INSERT INTO `sale` (`goodsid`, `name`, `price`, `quantity`) "
-						+ "VALUES (?, ?, ?, ?);");
+						"INSERT INTO `sale` (`goodsid`, `name`, `price`, `quantity`, imgname) "
+						+ "VALUES (?, ?, ?, ?, ?);");
 				pStmt.setString(1, phone.getGoodsid());
 				pStmt.setString(2, phone.getName());
 				pStmt.setDouble(3, phone.getPrice());
 				pStmt.setInt(4, phone.getQuantity());
+				pStmt.setString(5, phone.getImgname());
 				
 				rowEffected = pStmt.executeUpdate();
 				
@@ -77,7 +78,8 @@ public class PhoneDAO {
 						rs.getString("goodsid"), 
 						rs.getString("name"), 
 						rs.getDouble("price"),
-						rs.getInt("quantity")
+						rs.getInt("quantity"),
+						rs.getString("imgname")
 						);
 			}
 			
@@ -102,14 +104,15 @@ public class PhoneDAO {
 			connection = dataSource.getConnection();
 			
 			stmt = connection.createStatement();
-			rs = stmt.executeQuery("select goodsid,name,price,quantity from items where goodsid like 'C%';");
+			rs = stmt.executeQuery("select goodsid,name,price,quantity,imgname from items where goodsid like 'C%';");
 			
 			while (rs.next()) {
 				phoneList.add(new Phone(
 						rs.getString("goodsid"), 
 						rs.getString("name"), 
 						rs.getDouble("price"),
-						rs.getInt("quantity")
+						rs.getInt("quantity"),
+						rs.getString("imgname")
 						));
 				
 			}
@@ -135,13 +138,15 @@ public class PhoneDAO {
 					+ "`goodsid` = ?, "
 					+ "`name` = ?, "
 					+ "`price` = ?, "
-					+ "`quantity` = quantity-? "
+					+ "`quantity` = quantity-?, "
+					+ "imgname = ? "
 					+ "WHERE (`goodsid` = ?);");
 			pStmt.setString(1, phone.getGoodsid());
 			pStmt.setString(2, phone.getName());
 			pStmt.setDouble(3, phone.getPrice());
 			pStmt.setInt(4, phone.getQuantity());
-			pStmt.setString(5, phone.getGoodsid());
+			pStmt.setString(5, phone.getImgname());
+			pStmt.setString(6, phone.getGoodsid());
 			
 			rowEffected = pStmt.executeUpdate();
 			

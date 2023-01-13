@@ -1,12 +1,10 @@
 package com.mystore.model;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,11 +41,12 @@ public class LaptopDAO {
 			connection = dataSource.getConnection();
 			
 			pStmt = connection.prepareStatement("INSERT INTO `sale` "
-					+ "(`goodsid`, `name`, `price`, `quantity`) VALUES (?, ?, ?, ?);");
+					+ "(`goodsid`, `name`, `price`, `quantity`, imgname) VALUES (?, ?, ?, ?, ?);");
 			pStmt.setString(1, laptop.getGoodsid());
 			pStmt.setString(2, laptop.getName());
 			pStmt.setDouble(3, laptop.getPrice());
 			pStmt.setInt(4, laptop.getQuantity());
+			pStmt.setString(5, laptop.getImgname());
 			
 			rowEffected = pStmt.executeUpdate();
 			
@@ -82,7 +81,8 @@ public class LaptopDAO {
 						rs.getString("goodsid"),
 						rs.getString("name"),
 						rs.getDouble("price"),
-						rs.getInt("quantity")
+						rs.getInt("quantity"),
+						rs.getString("imgname")
 						);
 				
 			}
@@ -110,15 +110,17 @@ public class LaptopDAO {
 					+ "goodsid = ?, "
 					+ "name = ?, "
 					+ "price = ?, "
-					+ "quantity=quantity-? "
+					+ "quantity=quantity-?,"
+					+ " imgname = ? "
 					+ "WHERE (`goodsid` = ?);");
 			
 			pStmt.setString(1, laptop.getGoodsid());
 			pStmt.setString(2, laptop.getName());
 			pStmt.setDouble(3, laptop.getPrice());
 			pStmt.setInt(4, laptop.getQuantity());
+			pStmt.setString(5, laptop.getImgname());
 			
-			pStmt.setString(5, laptop.getGoodsid());
+			pStmt.setString(6, laptop.getGoodsid());
 			
 			rowEffected = pStmt.executeUpdate();
 			
@@ -142,7 +144,7 @@ public class LaptopDAO {
 			connection = dataSource.getConnection();
 
 			stmt = connection.createStatement();
-			rs = stmt.executeQuery("select goodsid,name,price,quantity from items where goodsid like 'A%';");
+			rs = stmt.executeQuery("select goodsid,name,price,quantity,imgname from items where goodsid like 'A%';");
 
 			while (rs.next()) {
 
@@ -150,7 +152,8 @@ public class LaptopDAO {
 						rs.getString("goodsid"), 
 						rs.getString("name"), 
 						rs.getDouble("price"), 
-						rs.getInt("quantity")
+						rs.getInt("quantity"),
+						rs.getString("imgname")
 						));
 			}
 

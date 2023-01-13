@@ -50,8 +50,8 @@ public class SaleItemsDAO {
 						rs.getString("goodsid"), 
 						rs.getString("name"), 
 						rs.getDouble("price"), 
-						rs.getInt("quantity")
-						
+						rs.getInt("quantity"),
+						rs.getString("imgname")
 						));
 			}
 			

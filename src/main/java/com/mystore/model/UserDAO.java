@@ -85,6 +85,7 @@ public class UserDAO {
 			rs = stmt.executeQuery("select role from user where email='"+email+"';");
 			
 			while(rs.next()) {
+				
 				user = new User(email);
 			}
 			
