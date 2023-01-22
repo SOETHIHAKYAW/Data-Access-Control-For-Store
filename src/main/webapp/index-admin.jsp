@@ -83,7 +83,7 @@ td {
 							aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="home-page.html">Products</a></li>
 							<li><a class="dropdown-item" href="#">Factory</a></li>
-							<li><a class="dropdown-item" href="signup">Sign Up</a></li>
+							<li><a class="dropdown-item" href="signup.jsp">Sign Up</a></li>
 							<li><hr class="dropdown-divider" /></li>
 							<li><a class="dropdown-item" href="login?mode=LOGOUT">Logout</a></li>
 

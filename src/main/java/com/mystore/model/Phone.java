@@ -29,7 +29,7 @@ public class Phone {
 		this.imgname = imgname;
 	}
 	
-	// for new table to create phone from buy.
+	
 		public Phone(String goodsid, String name, double price, int quantity) {
 			super();
 			this.goodsid = goodsid;
